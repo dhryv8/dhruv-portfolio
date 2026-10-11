@@ -10,15 +10,32 @@ export const getCachedContributions = unstable_cache(
   async (username: string) => {
     const apiUrl = process.env.NEXT_PUBLIC_GITHUB_CONTRIBUTIONS_API_URL
     if (!apiUrl) {
-      throw new Error("NEXT_PUBLIC_GITHUB_CONTRIBUTIONS_API_URL is not set")
-    }
-
-    const res = await fetch(`${apiUrl}/${username}?y=last`)
-    if (!res.ok) {
+      console.warn(
+        "GitHub contributions are unavailable because NEXT_PUBLIC_GITHUB_CONTRIBUTIONS_API_URL is not set."
+      )
       return []
     }
-    const data = (await res.json()) as GitHubContributionsResponse
-    return data.contributions ?? []
+
+    try {
+      const res = await fetch(`${apiUrl}/${username}?y=last`, {
+        signal: AbortSignal.timeout(8_000),
+      })
+      if (!res.ok) {
+        console.warn(
+          `GitHub contributions request failed with status ${res.status}.`
+        )
+        return []
+      }
+
+      const data = (await res.json()) as GitHubContributionsResponse
+      return data.contributions ?? []
+    } catch (error) {
+      console.warn(
+        `Unable to load GitHub contributions for ${username}; continuing without them.`,
+        error
+      )
+      return []
+    }
   },
   ["github-contributions"],
   { revalidate: 86400 } // Cache for 1 day (86400 seconds)
