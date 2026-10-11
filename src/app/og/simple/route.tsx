@@ -17,6 +17,14 @@ export async function GET(request: Request) {
 
   const title = clampParam(searchParams.get("title"), 160)
   const description = clampParam(searchParams.get("description"), 320)
+  const initials =
+    title
+      .trim()
+      .split(/\s+/)
+      .map((name) => name[0])
+      .join("")
+      .slice(0, 2)
+      .toUpperCase() || "DU"
 
   return new ImageResponse(
     <div tw="flex h-full w-full bg-black text-zinc-50">
@@ -25,18 +33,16 @@ export async function GET(request: Request) {
       <div tw="absolute inset-x-0 top-12 flex h-px border border-zinc-800" />
       <div tw="absolute inset-x-0 bottom-12 flex h-px border border-zinc-800" />
 
-      <div tw="absolute top-18 left-18 flex">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 512 256"
-          width={128}
-          height={64}
+      <div tw="absolute top-18 left-18 flex items-center justify-center border-2 border-zinc-800 px-5 py-3">
+        <span
+          style={{
+            fontFamily: "GeistSans",
+            fontWeight: 600,
+            fontSize: 28,
+          }}
         >
-          <path
-            fill="currentColor"
-            d="M192 256H64v-64h128v64ZM448 64H320v128h128v64H256V0h192v64ZM64 192H0V64h64v128ZM512 192h-64V64h64v128ZM192 64H64V0h128v64Z"
-          />
-        </svg>
+          {initials}
+        </span>
       </div>
 
       <div tw="absolute inset-x-0 top-40 bottom-24 flex flex-col justify-end border-t-2 border-zinc-800">

@@ -55,6 +55,8 @@ export const metadata: Metadata = {
   ],
   creator: USER.displayName,
   openGraph: {
+    title: `${USER.displayName} | Software Engineer`,
+    description: SITE_INFO.description,
     siteName: SITE_INFO.name,
     url: "/",
     type: "profile",
@@ -62,18 +64,25 @@ export const metadata: Metadata = {
     firstName: USER.firstName,
     lastName: USER.lastName,
     username: USER.username,
-    ...(SITE_INFO.ogImage
-      ? {
-          images: [
-            {
-              url: SITE_INFO.ogImage,
-              width: 1200,
-              height: 630,
-              alt: SITE_INFO.name,
-            },
-          ],
-        }
-      : {}),
+    images: [
+      {
+        url:
+          SITE_INFO.ogImage ??
+          `/og/simple?title=${encodeURIComponent(USER.displayName)}&description=${encodeURIComponent("Software Engineer")}`,
+        width: 1200,
+        height: 630,
+        alt: `${USER.displayName} — Software Engineer`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${USER.displayName} | Software Engineer`,
+    description: SITE_INFO.description,
+    images: [
+      SITE_INFO.ogImage ??
+        `/og/simple?title=${encodeURIComponent(USER.displayName)}&description=${encodeURIComponent("Software Engineer")}`,
+    ],
   },
 }
 

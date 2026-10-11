@@ -5,7 +5,7 @@ export const USER: User = {
   lastName: "Upadhyay",
   displayName: "Dhruv Upadhyay",
   username: "dhryv8",
-  bio: "Computer Science and Engineering graduate.",
+  bio: "Software engineer building reliable web applications with Java, React, Spring Boot, and AWS.",
   flipSentences: [],
   address: "",
   phoneNumberB64: "KzkxIDYyNjEwODM1MTc=",

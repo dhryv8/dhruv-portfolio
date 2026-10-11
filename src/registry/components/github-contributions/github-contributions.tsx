@@ -24,23 +24,25 @@ export function GitHubContributions({
   contributions,
   githubProfileUrl,
   className,
+  periodLabel,
 }: {
   contributions: Promise<Activity[]>
   githubProfileUrl: string
   className?: string
+  periodLabel?: string
 }) {
   const data = use(contributions)
 
   return (
     <ContributionGraph
-      className={cn("mx-auto py-2", className)}
+      className={cn("mx-auto w-full py-2", className)}
       data={data}
       blockSize={11}
       blockMargin={3}
       blockRadius={2}
     >
       <ContributionGraphCalendar
-        className="no-scrollbar px-2"
+        className="no-scrollbar w-full px-2 [&_svg]:h-auto [&_svg]:w-full"
         title="GitHub Contributions"
       >
         {({ activity, dayIndex, weekIndex }) => (
@@ -70,7 +72,8 @@ export function GitHubContributions({
         <ContributionGraphTotalCount>
           {({ totalCount, year }) => (
             <div className="text-muted-foreground">
-              {totalCount.toLocaleString("en")} contributions in {year} on{" "}
+              {totalCount.toLocaleString("en")} contributions{" "}
+              {periodLabel ?? `in ${year}`} on{" "}
               <a
                 className="text-foreground link-underline"
                 href={githubProfileUrl}
