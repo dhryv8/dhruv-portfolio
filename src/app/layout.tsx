@@ -42,8 +42,8 @@ const darkModeScript = String.raw`
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_INFO.url),
   title: {
-    template: `%s – ${SITE_INFO.name}`,
-    default: `${USER.displayName} – ${USER.jobTitle}`,
+    template: `%s – ${new URL(SITE_INFO.url).host}`,
+    default: new URL(SITE_INFO.url).host,
   },
   description: SITE_INFO.description,
   keywords: SITE_INFO.keywords,
