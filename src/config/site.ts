@@ -1,12 +1,13 @@
 import type { Route } from "next"
 
 import type { NavItem } from "@/types/nav"
+import { getSiteUrl } from "@/lib/site-url"
 import { SOCIAL } from "@/features/portfolio/data/social-links"
 import { USER } from "@/features/portfolio/data/user"
 
 export const SITE_INFO = {
   name: USER.displayName,
-  url: process.env.NEXT_PUBLIC_APP_URL || "https://chanhdai.com",
+  url: getSiteUrl(),
   ogImage: USER.ogImage,
   description: USER.bio,
   keywords: USER.keywords,

@@ -46,8 +46,9 @@ corepack pnpm start
 
 The site can be deployed to [Vercel](https://vercel.com/) by importing its GitHub
 repository and using the detected Next.js settings. Set `NEXT_PUBLIC_APP_URL` to
-the production site URL in the deployment environment. The production build also
-requires Bun for registry generation.
+the production site URL (for example, `https://dhryv8folio.vercel.app`) in the
+deployment environment. The production build also requires Bun for registry
+generation.
 
 ## License and community
 
