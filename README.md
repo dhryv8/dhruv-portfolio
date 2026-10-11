@@ -14,10 +14,6 @@ certifications. It is built with Next.js, React, TypeScript, and Tailwind CSS,
 with a responsive layout, light and dark themes, and an animated meteor
 background.
 
-This portfolio is adapted from
-[chanhdai.com](https://github.com/ncdai/chanhdai.com). The original MIT license
-attribution is retained; the portfolio content and customizations are mine.
-
 ## Run locally
 
 ### Requirements
